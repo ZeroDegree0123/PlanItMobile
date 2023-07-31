@@ -1,23 +1,22 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NativeWindStyleSheet } from 'nativewind';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from './config/firebase'
 
-import HomeScreen from './app/screens/HomeScreen';
-import AccountScreen from './app/screens/AccountScreen';
-import EventDetailScreen from './app/screens/EventDetailScreen';
 import AppNavigator from './app/components/navigation/AppNavigator';
-
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
+import AuthScreen from './app/screens/AuthScreen';
 
 export default function App() {
+  const [user, setUser] = useState(false);
+  const [loading, setLoading] = useState(false)
+
   return (
     <NavigationContainer>
+      {user ?
       <AppNavigator/>
+      :
+      <AuthScreen/>
+      }
     </NavigationContainer>
   //  <NavigationContainer>
   //     <Stack.Navigator>

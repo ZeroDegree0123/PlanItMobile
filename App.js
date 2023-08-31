@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { db } from './config/firebase'
+
 
 import AppNavigator from './app/components/navigation/AppNavigator';
 import AuthScreen from './app/screens/AuthScreen';
+import AppTextInput from './app/components/AppTextInput';
+
 
 export default function App() {
   const [user, setUser] = useState(false);
@@ -12,11 +14,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {user ?
-      <AppNavigator/>
-      :
-      <AuthScreen/>
-      }
+    
+      {/* <AppNavigator/> */}
+      <AuthScreen/> 
+      {/* <AppTextInput placeholder="Username" icon="email"/> */}
     </NavigationContainer>
   //  <NavigationContainer>
   //     <Stack.Navigator>

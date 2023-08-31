@@ -1,10 +1,11 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { SafeAreaView, Text, View } from 'react-native'
+import SignUp from '../components/auth/SignUp'
 
 export default function AuthScreen() {
   return (
-    <View>
-      <Text>AuthScreen</Text>
-    </View>
+    <SafeAreaView className="justify-center items-center">
+      <SignUp/>
+    </SafeAreaView>
   )
 }

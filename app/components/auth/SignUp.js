@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
 import { Button, View, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
-import { FIREBASE_AUTH } from '../../../config/firebase';
+import { FIREBASE_AUTH, FIRESTORE_DB } from '../../../config/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { addDoc, collection, getDocs, onSnapshot } from 'firebase/firestore';
+
 
 import AppTextInput from '../AppTextInput';
 
 
-export default function SignUp(props) {
+export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [newUser, setNewUser] = useState('')
     const auth = FIREBASE_AUTH
 
-    // const handleChange = (evt) => {
-    //     setEmail(evt.target.value);
-    //     setPassword(evt.target.value);
-    // }
+
+    const addUser = async (newUser) => {
+        const doc = addDoc(collection(FIRESTORE_DB, 'users'), {email: newUser.email})
+        setNewUser(doc)
+      }
+
+
 
     const signIn = async () => {
         setLoading(true);
@@ -35,12 +41,14 @@ export default function SignUp(props) {
             const response = await createUserWithEmailAndPassword(auth, email, password);
             console.log(response)
             alert('Check your emails!')
+            addUser(response.user)
         } catch (error) {
             console.log(error);
         } finally {
             setLoading(false);
         }
     }
+
 
     return (
         <View className="justify-center items-center w-max">

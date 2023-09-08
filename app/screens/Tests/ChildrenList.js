@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { FIRESTORE_DB } from '../../../config/firebase';
 import { collection } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import AddNew from './AddNew';
 
 export default function ChildrenList({ path }) {
     const query = collection(FIRESTORE_DB, path)
@@ -19,6 +20,7 @@ export default function ChildrenList({ path }) {
         <View>
             {/* <Text>hellow</Text> */}
             {docList}
+            <AddNew path={path}/>
         </View>
         </>
     );

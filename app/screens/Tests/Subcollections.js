@@ -5,6 +5,7 @@ import { collection } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 import ChildrenList from './ChildrenList';
+import AddNew from './AddNew';
 
 export default function Subcollections({user}) {
     const query = collection(FIRESTORE_DB, 'users')
@@ -22,6 +23,8 @@ export default function Subcollections({user}) {
             {/* <Text>Hello Subcollections</Text> */}
             {loading && <Text>Loading...</Text>}
             {docList}
+            <Text className="text-lg mt-10">Add a new User here...</Text>
+            <AddNew path='users'/>
         </SafeAreaView>
     );
 }

@@ -24,7 +24,7 @@ export default function Subcollections({user}) {
             {loading && <Text>Loading...</Text>}
             {docList}
             <Text className="text-lg mt-10">Add a new User here...</Text>
-            <AddNew path='users'/>
+            <AddNew path={`users`}/>
         </SafeAreaView>
     );
 }

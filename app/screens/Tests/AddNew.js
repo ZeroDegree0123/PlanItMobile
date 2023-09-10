@@ -1,36 +1,43 @@
 import React, { useRef, useState } from 'react';
 import { Button, Text, TextInput, View } from 'react-native';
-import { addDoc, doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../../config/firebase';
 
 export default function AddNew({ path }) {
-    const [name, setName] = useState('')
-
-    const handleChange = (evt) => {
-        setName({...name, [evt.target.name]: evt.target.value});
-    }
-
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        // const docRef = doc(FIRESTORE_DB, path)
-        // await addDoc(docRef, {name: name.current.value})
-        console.log(name.current.value)
+        const docRef = collection(FIRESTORE_DB, path)
+        await addDoc(docRef, {name: name, email: email})
+        console.log(name, email)
         console.log("submit")
     }
-
+    
+    console.log(path)
     return (
         <View className="flex-row justify-center items-center">
-            <View className='bg-gray-200 rounded-2xl flex-row my-5 p-3'>
+            <View className='flex-column my-5'>
                 <TextInput 
                     name="name"
                     value={name}
                     icon="plus" 
-                    className='text-md mx-2 w-1/2'
-                    placeholder='Input field'
-                    onChangeText={handleChange} 
-                    />
+                    className='bg-gray-200 rounded-2xl text-md my-1 p-2'
+                    placeholder='Name Input'
+                    onChangeText={(text) => setName(text)}
+                />
+                
+                <TextInput 
+                    name="email"
+                    value={email}
+                    icon="plus" 
+                    className='bg-gray-200 rounded-2xl text-md my-1 p-2'                    placeholder='Email Input'
+                    onChangeText={(text) => setEmail(text)}
+                />
             </View>
             <Button title='Submit' onPress={handleSubmit}/>
         </View>
     );
 }
+

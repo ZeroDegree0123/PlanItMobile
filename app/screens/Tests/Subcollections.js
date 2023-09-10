@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View, SafeAreaView, ScrollView } from 'react-native';
 import { FIRESTORE_DB } from '../../../config/firebase';
 import { collection } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -7,7 +7,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChildrenList from './ChildrenList';
 import AddNew from './AddNew';
 
-export default function Subcollections({user}) {
+export default function Subcollections() {
     const query = collection(FIRESTORE_DB, 'users')
     const [docs, loading, error] = useCollectionData(query)
 
@@ -20,11 +20,13 @@ export default function Subcollections({user}) {
 
     return (
         <SafeAreaView className="flex-1 items-start justify-center m-10">
-            {/* <Text>Hello Subcollections</Text> */}
-            {loading && <Text>Loading...</Text>}
-            {docList}
-            <Text className="text-lg mt-10">Add a new User here...</Text>
-            <AddNew path={`users`}/>
+            <ScrollView className="w-max">
+                {/* <Text>Hello Subcollections</Text> */}
+                {loading && <Text>Loading...</Text>}
+                {docList}
+                <Text className="text-lg mt-10">Add a new User here...</Text>
+                <AddNew path={`users/`}/>
+            </ScrollView>
         </SafeAreaView>
     );
 }

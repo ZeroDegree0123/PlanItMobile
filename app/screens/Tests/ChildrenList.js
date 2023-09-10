@@ -11,7 +11,7 @@ export default function ChildrenList({ path }) {
 
     const docList = docs?.map(doc => (
         <View key={Math.random()}>
-            <Text>Tasks: -{doc.title}</Text>
+            <Text>Tasks: -{doc.name}</Text>
         </View>
     ))
 

@@ -5,10 +5,8 @@ import { Firestore, addDoc, collection, onSnapshot } from 'firebase/firestore';
 
 import AppNavigator from './app/components/navigation/AppNavigator';
 import AuthScreen from './app/screens/AuthScreen';
-import AppTextInput from './app/components/AppTextInput';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH, FIRESTORE_DB } from './config/firebase';
-import ListScreen from './app/screens/Tests/ListScreen';
 
 
 export default function App() {
@@ -21,6 +19,7 @@ export default function App() {
       setUser(user)
     })
   }, [])
+  
 
   return (
     <NavigationContainer>

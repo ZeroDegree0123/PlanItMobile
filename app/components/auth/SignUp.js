@@ -9,19 +9,22 @@ import AppTextInput from '../AppTextInput';
 
 
 export default function SignUp() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [newUser, setNewUser] = useState('')
+    const [loading, setLoading] = useState(false);
     const auth = FIREBASE_AUTH
 
 
     const addUser = async (newUser) => {
-        const doc = addDoc(collection(FIRESTORE_DB, 'users'), {email: newUser.email})
+        const doc = addDoc(collection(FIRESTORE_DB, 'users'), { email: email, name: name})
         setNewUser(doc)
       }
 
-
+    //   console.log(name)
+    //   console.log(email)
+    //   console.log(newUser)
 
     const signIn = async () => {
         setLoading(true);
@@ -54,12 +57,17 @@ export default function SignUp() {
         <View className="justify-center items-center w-max">
             <KeyboardAvoidingView behavior='padding'>
                 <AppTextInput
+                    value={name}
+                    icon="account"
+                    placeholder='Username'
+                    onChangeText={(text) => setName(text)}
+                    />
+                <AppTextInput
                     value={email}
                     icon="email"
                     placeholder='Email'
-                    onChangeText={(text) => setEmail(text)}
+                    onChangeText={(text) => setEmail(text.toLowerCase())}
                     />
-
                 <AppTextInput
                     value={password}
                     icon="lock"

@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import EventList from '../components/eventComponent/EventList';
+import { collection, getDocs } from 'firebase/firestore';
+import { FIRESTORE_DB } from '../../config/firebase';
 
+export default function HomeScreen({ user }) {
+    const [currentUser, setCurrentUser] = useState()
+    const [loading, setLoading] = useState(true)
 
-export default function HomeScreen(props) {
+    useEffect(() => {
+        const getCurrentUser = async () => {
+            const userData = await getDocs(collection(FIRESTORE_DB, 'users'));
+            userData.forEach((doc) => {
+                const userEmail = doc.data().email
+                if (userEmail === user.email) {
+                    setCurrentUser(doc);
+                    setLoading(false);
+                }    
+            })
+        }
+        getCurrentUser();
+
+    }, [])
+
+    console.log(currentUser)
+    
     return (
         <SafeAreaView className='bg-blue-100 flex-1'>
             <View className='mx-4'>
@@ -22,119 +44,21 @@ export default function HomeScreen(props) {
                         </View>
                         
                         {/* EVENT CARDS */}
+                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
+                            <View className='flex-row items-center'>
+                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
+                                <Text>Task Name</Text>
+                            </View>
+                            <AntDesign name='star' size={20} color='gold' />
+                            {/* <AntDesign name='staro' size={20} color='black' /> */}
+                        </View>
+                       
+                        { loading ? 
+                            <Text>Loading</Text>
+                            :
+                            <EventList currentUser={currentUser}/>
+                        }
 
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
                     </ScrollView>
             </View>
         </SafeAreaView>

@@ -5,15 +5,15 @@ import { FIRESTORE_DB } from '../../../config/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 
-import EventCard from './EventCard';
+import TaskCard from './TaskCard';
 
-export default function EventList({ currentUser }) {
+export default function TaskList({ currentUser }) {
     const path = `users/${currentUser.id}/tasks`;
     const query = collection(FIRESTORE_DB, path)
     const [docs, loading, error] = useCollectionData(query)
 
     const docList = docs?.map((doc, id) => (
-        <EventCard doc={doc} key={id}/>
+        <TaskCard doc={doc} key={id}/>
     ))
 
     return (

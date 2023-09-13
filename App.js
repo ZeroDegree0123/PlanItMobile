@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Firestore, addDoc, collection, onSnapshot } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH, FIRESTORE_DB } from './config/firebase';
 
 
 import AppNavigator from './app/components/navigation/AppNavigator';
 import AuthScreen from './app/screens/AuthScreen';
-import { onAuthStateChanged } from 'firebase/auth';
-import { FIREBASE_AUTH, FIRESTORE_DB } from './config/firebase';
 
 
 export default function App() {

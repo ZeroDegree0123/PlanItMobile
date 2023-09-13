@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import EventList from '../components/eventComponent/EventList';
 import { collection, getDocs } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../config/firebase';
+
+import TaskForm from '../components/taskComponent/TaskForm';
+import TaskList from '../components/taskComponent/TaskList';
 
 export default function HomeScreen({ user }) {
     const [currentUser, setCurrentUser] = useState()
@@ -24,15 +26,19 @@ export default function HomeScreen({ user }) {
 
     }, [])
 
-    console.log(currentUser)
-    
     return (
-        <SafeAreaView className='bg-blue-100 flex-1'>
+        <SafeAreaView className='bg-sky-100 flex-1'>
             <View className='mx-4'>
                 <View className='flex-row items-center my-4'>
                     <Image className='w-20 h-20 rounded-full' source={{ uri: 'https://imgur.com/QhmOeZG.png' }}/>
                     <View className='p-4'>
-                        <Text className='font-bold text-lg'>Zachary Vasquez</Text>
+                        <Text className='font-bold text-lg'>
+                            { loading ?
+                                <Text>loading...</Text>
+                                :
+                                currentUser.data().name.toUpperCase()
+                            }
+                        </Text>
                         <Text>July 26th, 2023</Text>
                     </View>
                 </View>
@@ -44,22 +50,17 @@ export default function HomeScreen({ user }) {
                         </View>
                         
                         {/* EVENT CARDS */}
-                        <View className='flex-row items-center justify-between p-2 my-1 bg-slate-300 rounded'>
-                            <View className='flex-row items-center'>
-                                <View className='w-8 h-8 bg-red-400 rounded-full mr-2'></View>
-                                <Text>Task Name</Text>
-                            </View>
-                            <AntDesign name='star' size={20} color='gold' />
-                            {/* <AntDesign name='staro' size={20} color='black' /> */}
-                        </View>
                        
                         { loading ? 
-                            <Text>Loading</Text>
+                            <Text>loading...</Text>
                             :
-                            <EventList currentUser={currentUser}/>
+                            <TaskList currentUser={currentUser}/>
                         }
 
                     </ScrollView>
+                    
+                    <TaskForm/>
+
             </View>
         </SafeAreaView>
     );

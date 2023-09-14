@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Image, SafeAreaView, ScrollView, Text, View, Button } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { collection, getDocs } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../config/firebase';
@@ -9,6 +9,8 @@ import TaskList from '../components/taskComponent/TaskList';
 
 export default function HomeScreen({ user }) {
     const [currentUser, setCurrentUser] = useState()
+    const [tasksList, setTasksList] = useState()
+    const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -42,25 +44,27 @@ export default function HomeScreen({ user }) {
                         <Text>July 26th, 2023</Text>
                     </View>
                 </View>
+                <View className='max-h-96'>
                     <ScrollView className="divide-y divide-gray-200" >
-
                         <View className='flex-row p-2 rounded items-center'>
                             <Text className='text-base pr-2'>Filter</Text>
                             <AntDesign name='downcircle' size={16} color='black' />
                         </View>
                         
                         {/* EVENT CARDS */}
-                       
+                        
                         { loading ? 
                             <Text>loading...</Text>
                             :
                             <TaskList currentUser={currentUser}/>
                         }
-
                     </ScrollView>
-                    
-                    <TaskForm/>
-
+                </View>
+                { open ? 
+                    <TaskForm open={open} setOpen={setOpen} path={`users/${currentUser.id}/tasks`}/>
+                    :
+                    <Button title='open' onPress={() => setOpen(true)}/>
+                }
             </View>
         </SafeAreaView>
     );

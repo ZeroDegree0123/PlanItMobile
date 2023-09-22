@@ -6,6 +6,7 @@ import { FIRESTORE_DB } from '../../config/firebase';
 
 import TaskForm from '../components/taskComponent/TaskForm';
 import TaskList from '../components/taskComponent/TaskList';
+import AppButton from '../components/AppButton';
 
 export default function HomeScreen({ user }) {
     const [currentUser, setCurrentUser] = useState()
@@ -38,33 +39,36 @@ export default function HomeScreen({ user }) {
                             { loading ?
                                 <Text>loading...</Text>
                                 :
-                                currentUser.data().name.toUpperCase()
+                                <Text>Welcome {currentUser.data().name.toUpperCase()}</Text>
                             }
                         </Text>
                         <Text>July 26th, 2023</Text>
                     </View>
                 </View>
-                <View className='max-h-96'>
-                    <ScrollView className="divide-y divide-gray-200" >
-                        <View className='flex-row p-2 rounded items-center'>
-                            <Text className='text-base pr-2'>Filter</Text>
-                            <AntDesign name='downcircle' size={16} color='black' />
-                        </View>
-                        
-                        {/* EVENT CARDS */}
-                        
-                        { loading ? 
-                            <Text>loading...</Text>
-                            :
-                            <TaskList currentUser={currentUser}/>
-                        }
-                    </ScrollView>
+                <View className='flex-row p-2 rounded items-center'>
+                    <Text className='text-base pr-2'>Filter</Text>
+                    <AntDesign name='downcircle' size={16} color='black' />
                 </View>
-                { open ? 
-                    <TaskForm open={open} setOpen={setOpen} path={`users/${currentUser.id}/tasks`}/>
-                    :
-                    <Button title='open' onPress={() => setOpen(true)}/>
-                }
+                <ScrollView className="h-max divide-y divide-gray-200" >
+                    
+                    {/* EVENT CARDS */}
+                    
+                    { loading ? 
+                        <Text>loading...</Text>
+                        :
+                        <TaskList currentUser={currentUser}/>
+                    }
+                </ScrollView>
+                <View className="flex-1 flex-row justify-center p-4">
+                    { open ? 
+                        
+                        <View className='absolute w-2/3'>
+                            <TaskForm open={open} setOpen={setOpen} path={`users/${currentUser.id}/tasks`}/>
+                        </View>
+                        :
+                        <AppButton title={<AntDesign name="plus" size={24} color="white" />} onPress={() => setOpen(true)} styles='justify-center items-center w-12 h-12 bg-blue-400 border-sky-100 border-2 rounded-full mr-2 shadow-md'/>
+                    }
+                </View>
             </View>
         </SafeAreaView>
     );

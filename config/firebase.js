@@ -12,13 +12,13 @@ import { getFirestore } from "firebase/firestore";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD1QAB6_aoVDbQntX6jUBMe6-5CBDZu-UI",
-  authDomain: "planit-f6457.firebaseapp.com",
-  projectId: "planit-f6457",
-  storageBucket: "planit-f6457.appspot.com",
-  messagingSenderId: "524847393218",
-  appId: "1:524847393218:web:5029348dd734ae5857ce5b",
-  measurementId: "G-EKE3VMLSYP",
+  apiKey: FIREBASE_API_KEY,
+  authDomain: FIREBASE_AUTH_DOMAIN,
+  projectId: FIREBASE_PROJECT_ID,
+  storageBucket: FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
+  appId: FIREBASE_APP_ID,
+  measurementId: FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

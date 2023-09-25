@@ -31,7 +31,8 @@ export default function AppNavigator({ user }) {
           options={{
             tabBarIcon: () => (
               <Ionicons name="ios-calendar" size={28} color="black" />
-            )
+            ),
+            headerShown: false
           }}
         />
         <Tab.Screen

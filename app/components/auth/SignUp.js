@@ -18,7 +18,7 @@ export default function SignUp() {
 
 
     const addUser = async (newUser) => {
-        const doc = addDoc(collection(FIRESTORE_DB, 'users'), { email: email, name: name});
+        const doc = addDoc(collection(FIRESTORE_DB, 'users'), {email: email, name: name});
         setNewUser(doc);
     }
 
@@ -26,7 +26,7 @@ export default function SignUp() {
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth, email, password);
-            console.log(response)
+            console.log(response.user.uid)
         } catch (error) {
             console.log(error);
         } finally {

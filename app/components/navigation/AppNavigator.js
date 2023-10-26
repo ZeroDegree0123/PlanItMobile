@@ -25,7 +25,7 @@ export default function AppNavigator({ user }) {
             headerShown: false
           })}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name='Calendar'
           component={CalendarScreen}
           options={{
@@ -34,14 +34,16 @@ export default function AppNavigator({ user }) {
             ),
             headerShown: false
           }}
-        />
+        /> */}
         <Tab.Screen
           name='Account'
           user={user}
-          component={AccountScreen}
+          children={() => <AccountScreen user={user}/>}
           options={{
             tabBarIcon: () => (
-              <MaterialCommunityIcons name="account" size={28} color="black" />            )
+              <MaterialCommunityIcons name="account" size={28} color="black" />
+              ),
+              headerShown: false,
           }}
         />
     </Tab.Navigator>

@@ -9,10 +9,10 @@ import TaskList from '../components/taskComponent/TaskList';
 import AppButton from '../components/AppButton';
 
 export default function HomeScreen({ user }) {
-    const [currentUser, setCurrentUser] = useState()
-    const [tasksList, setTasksList] = useState()
-    const [open, setOpen] = useState(false)
-    const [loading, setLoading] = useState(true)
+    const [currentUser, setCurrentUser] = useState();
+    const [tasksList, setTasksList] = useState();
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getCurrentUser = async () => {
@@ -22,21 +22,22 @@ export default function HomeScreen({ user }) {
                 if (userEmail === user.email) {
                     setCurrentUser(doc);
                     setLoading(false);
-                }    
+                }
             })
         }
         getCurrentUser();
-
     }, [])
+
+    // console.log(currentUser)
 
     return (
         <SafeAreaView className='bg-sky-100 flex-1'>
             <View className='mx-4'>
                 <View className='flex-row items-center my-4'>
-                    <Image className='w-20 h-20 rounded-full' source={{ uri: 'https://imgur.com/QhmOeZG.png' }}/>
+                    <Image className='w-20 h-20 rounded-full' source={{ uri: 'https://imgur.com/QhmOeZG.png' }} />
                     <View className='p-4'>
                         <Text className='font-bold text-lg'>
-                            { loading ?
+                            {loading ?
                                 <Text>loading...</Text>
                                 :
                                 <Text>Welcome {currentUser.data().name.toUpperCase()}</Text>
@@ -49,26 +50,22 @@ export default function HomeScreen({ user }) {
                     <Text className='text-base pr-2'>Filter</Text>
                     <AntDesign name='downcircle' size={16} color='black' />
                 </View>
-                <ScrollView className="h-max divide-y divide-gray-200" >
-                    
-                    {/* EVENT CARDS */}
-                    
-                    { loading ? 
+                <ScrollView className="divide-y divide-gray-200 mb-auto">
+                    {loading ?
                         <Text>loading...</Text>
                         :
-                        <TaskList currentUser={currentUser}/>
+                        <TaskList currentUser={currentUser} />
                     }
                 </ScrollView>
-                <View className="flex-1 flex-row justify-center p-4">
-                    { open ? 
-                        
-                        <View className='absolute w-2/3'>
-                            <TaskForm open={open} setOpen={setOpen} path={`users/${currentUser.id}/tasks`}/>
-                        </View>
-                        :
-                        <AppButton title={<AntDesign name="plus" size={24} color="white" />} onPress={() => setOpen(true)} styles='justify-center items-center w-12 h-12 bg-blue-400 border-sky-100 border-2 rounded-full mr-2 shadow-md'/>
-                    }
-                </View>
+            </View>
+            <View className="absolute flex-1 flex-row justify-center bottom-0 right-0 p-2">
+                {open ?
+                    <View className='w-2/3'>
+                        <TaskForm open={open} setOpen={setOpen} path={`users/${currentUser.id}/tasks`} />
+                    </View>
+                    :
+                    <AppButton title={<AntDesign name="plus" size={24} color="white" />} onPress={() => setOpen(true)} styles='justify-center items-center w-12 h-12 bg-blue-400 border-sky-100 border-2 rounded-full mr-2 shadow-md' />
+                }
             </View>
         </SafeAreaView>
     );

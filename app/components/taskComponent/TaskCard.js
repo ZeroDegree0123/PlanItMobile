@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { collection, setDoc, doc } from 'firebase/firestore';

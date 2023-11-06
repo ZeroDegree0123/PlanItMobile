@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../../../config/firebase';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import TaskCard from './TaskCard';
 import CompletedTaskCard from './CompletedTaskCard';

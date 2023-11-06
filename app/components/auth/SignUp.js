@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, View, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
+import { Button, View, ActivityIndicator, KeyboardAvoidingView, Text } from 'react-native';
 import { FIREBASE_AUTH, FIRESTORE_DB } from '../../../config/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { addDoc, collection, getDocs, onSnapshot } from 'firebase/firestore';
@@ -18,7 +18,7 @@ export default function SignUp() {
 
 
     const addUser = async (newUser) => {
-        const doc = addDoc(collection(FIRESTORE_DB, 'users'), {email: email, name: name});
+        const doc = addDoc(collection(FIRESTORE_DB, 'users'), { email: email, name: name });
         setNewUser(doc);
     }
 
@@ -28,7 +28,8 @@ export default function SignUp() {
             const response = await signInWithEmailAndPassword(auth, email, password);
             console.log(response.user.uid)
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
+            alert(`email or password is incorrect please try again`)
         } finally {
             setLoading(false);
         }
@@ -42,12 +43,12 @@ export default function SignUp() {
             alert('Check your emails!')
             addUser(response.user);
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
+            alert(`please make sure all fields are filled`)
         } finally {
             setLoading(false);
         }
     }
-
 
     return (
         <View className="justify-center items-center w-max">
@@ -57,29 +58,31 @@ export default function SignUp() {
                     icon='account'
                     placeholder='Username'
                     onChangeText={(text) => setName(text)}
-                    />
+                />
                 <AppTextInput
                     value={email}
                     icon='email'
                     placeholder='Email'
                     onChangeText={(text) => setEmail(text.toLowerCase())}
-                    />
+                />
                 <AppTextInput
                     value={password}
                     icon='lock'
                     placeholder='Password'
                     secureTextEntry={true}
                     onChangeText={(text) => setPassword(text)}
-                    />
+                />
 
-                {loading ? 
-                    <ActivityIndicator size='large' color='#0000ff'/>
-                    : 
+                {loading ?
+                    <ActivityIndicator size='large' color='#0000ff' />
+                    :
                     <>
-                    <Button title='Login' onPress={signIn}/>
-                    <Button title='SignUp' onPress={signUp}/>
+                        <Button title='Login' onPress={signIn} />
+                        <Button title='SignUp' onPress={signUp} />
                     </>
                 }
+
+
 
             </KeyboardAvoidingView>
         </View>

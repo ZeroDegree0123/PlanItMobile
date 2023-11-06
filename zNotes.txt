@@ -1,0 +1,2 @@
+// Next Steps for Image Picker: Create a new field for users to hold Profile Image URL, every time a new image is 
+set it should update the database. Will most likely use SnapShot. 

@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "PlanItMobile",
-    "slug": "PlanItMobile",
+    "name": "PlanIt",
+    "slug": "PlanIt",
+    "description": "A task app for organizing all your pesky tasks",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +16,29 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.zacharyvasquez.PlanIt"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.zacharyvasquez.PlanIt"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "288d3828-56dc-4173-83e3-be577e74f443"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/288d3828-56dc-4173-83e3-be577e74f443"
     }
   }
 }

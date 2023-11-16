@@ -63,7 +63,7 @@ export default function SignUp() {
                     value={email}
                     icon='email'
                     placeholder='Email'
-                    onChangeText={(text) => setEmail(text.toLowerCase())}
+                    onChangeText={(text) => setEmail(text)}
                 />
                 <AppTextInput
                     value={password}

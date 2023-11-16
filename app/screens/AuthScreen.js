@@ -4,8 +4,8 @@ import SignUp from '../components/auth/SignUp'
 
 export default function AuthScreen() {
   return (
-    <SafeAreaView className="justify-center items-center">
-      <SignUp/>
+    <SafeAreaView className="justify-center items-center flex-1">
+      <SignUp />
     </SafeAreaView>
   )
 }

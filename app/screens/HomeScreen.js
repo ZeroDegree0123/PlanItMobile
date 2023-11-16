@@ -28,7 +28,7 @@ export default function HomeScreen({ currentUser, profileImageList, loading }) {
             :
             <>
                 <SafeAreaView className='bg-sky-100 flex-1 justify-center items-center'>
-                    <View className='mx-4 w-full'>
+                    <View className='mx-4 mt-6 w-full'>
 
                         <View className='flex-row items-center m-2 '>
                             <ImagePicker image={profileImage} onPress={handleModal} />

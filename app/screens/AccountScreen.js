@@ -24,8 +24,8 @@ export default function AccountScreen({ user, currentUser }) {
     })
 
     return (
-        <SafeAreaView className='flex-1 bg-sky-100 h-'>
-            <ScrollView className='p-5'>
+        <SafeAreaView className='flex-1 bg-sky-100'>
+            <ScrollView className='p-5 mt-6'>
 
                 <Text className='text-lg'>Account Info</Text>
 
